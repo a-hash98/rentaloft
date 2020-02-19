@@ -7,7 +7,7 @@ const Banner = ({children, title, subtitle}) => {
             <div></div>
             <p>{subtitle}</p>
             {children}
-            </div>
+        </div>
       
     )
 }
