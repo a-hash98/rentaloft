@@ -3,6 +3,7 @@ import HeroImage from "../components/HeroImage"
 import Banner from "../components/Banner"
 import { Link } from 'react-router-dom'
 import Services from '../components/Services'
+import FeaturedLofts from '../components/FeaturedLofts'
 
 const Home = () => {
 
@@ -16,6 +17,7 @@ const Home = () => {
         </Banner>
     </HeroImage>
     <Services />
+    <FeaturedLofts />
     </>
     )
 }

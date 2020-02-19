@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { LoftProvider } from "./Context"
 
 import NavBar from "./components/NavBar"
 import Home from "./pages/Home"
@@ -13,6 +14,7 @@ import { Route, Switch } from 'react-router-dom'
 function App() {
   return (
     <>
+    <LoftProvider>
     <Router>
     < NavBar />
     <Switch>
@@ -23,6 +25,7 @@ function App() {
     <Route component={Error} />
     </Switch>
     </Router>
+    </LoftProvider>
     </>
   );
 }
