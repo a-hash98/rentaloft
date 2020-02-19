@@ -43,7 +43,7 @@ class LoftProvider extends Component {
 
     render() {
         return (
-            <LoftContext.Provider value={{...this.state, getRoom: this.getRoom}}>
+            <LoftContext.Provider value={{...this.state, getLoft: this.getLoft}}>
             {this.props.children}
             </LoftContext.Provider>
     

@@ -4,7 +4,7 @@ import HeroImage from '../components/HeroImage'
 import Banner from '../components/Banner'
 import { Link } from 'react-router-dom'
 import { LoftContext } from '../Context'
-import { runInThisContext } from 'vm';
+import StyledHero from "../components/StyledHero"
 
 class LoftDetails extends Component {
 
@@ -14,7 +14,7 @@ class LoftDetails extends Component {
             slug: this.props.match.params.slug,
             defaultImage
         }
-        }
+    }
     static contextType = LoftContext
 
     render() {
@@ -30,15 +30,50 @@ class LoftDetails extends Component {
             )
         }
         
-        const { name, descriptiom, capacity, size, price, extras, breakfast, pets, images } = loft
+        const { name, description, capacity, size, price, extras, breakfast, pets, images } = loft
         return (
-            
-        <HeroImage hero='loftsHero'>
+        <> 
+        <StyledHero img={images[1]}>
             <Banner title={`${name} loft`}>
-                <Link to='/lofts'>Browse lofts</Link>
+                <Link to='/lofts' className='btn-primary'>Browse lofts</Link>
             </Banner>
-        </HeroImage>
-        
+        </StyledHero>
+
+         <section className="single-room">
+             <div className="single-room-images">
+
+                {images.map((item,index) => {
+                 return <img id={index} src={item} alt={name}/>
+                 })}
+               
+             </div>
+             <div className="single-room-info">
+                 <article className="desc">
+                     <h3>details</h3>
+                     <p>{description}</p>
+                 </article>
+                 <article className="info">
+                     <h3>info</h3>
+                     <h6>price: ${price}</h6>
+                     <h6>size ${size} sqft</h6>
+
+                    <h6>max capacity: {
+                        capacity > 1 ? `${capacity} people` : `${capacity} person`}}
+                    </h6>
+                    <h6> {pets ? "pets allowed" : "no pets allowed"}</h6>
+                    <h6>{breakfast && "free breakfast included"}</h6>
+                </article>
+            </div>
+         </section>
+         <section className="room-extras">
+             <h6>extras</h6>
+             <ul className="extras">
+                 {extras.map((item, index)=> {
+                     return <li key={index}>- {item}</li>
+                 })}
+             </ul> 
+        </section>
+        </>
         )
     }
 }
