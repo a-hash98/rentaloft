@@ -35,9 +35,15 @@ class LoftProvider extends Component {
         return tempItems
     }
 
+    getLoft = (slug) => {
+        let tempLofts = [...this.state.lofts]
+        const loft = tempLofts.find((loft => loft.slug === slug))
+        return loft
+    }
+
     render() {
         return (
-            <LoftContext.Provider value={this.state}>
+            <LoftContext.Provider value={{...this.state, getRoom: this.getRoom}}>
             {this.props.children}
             </LoftContext.Provider>
     
