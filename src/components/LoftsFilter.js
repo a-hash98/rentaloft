@@ -13,24 +13,38 @@ const LoftsFilter = ({lofts}) => {
         handleChange, type, capacity, price, minPrice, maxPrice, minSize, maxSize, breakfast, pets } = context
 
     
-    let options = getUniqueOptions(lofts, "type")
-    options = ["all", ...options]
-    options = options.map((item, index) => {
+    let types = getUniqueOptions(lofts, "type")
+    types = ["all", ...types]
+    types = types.map((item, index) => {
           return <option value={item} key={index}>{item}</option>
     })
+    let guests = getUniqueOptions(lofts, "capacity")
+    guests = guests.map((item, index) => {
+        return <option value={item} key={index}>{item}</option>
+  })
 
     return (
+        //TYPE FILTER
         <section className="filter-container">
            <Title title='search lofts' />
         <form className="filter-form">
                <div className="form-group">
                    <label htmlFor="type">loft type</label>
                    <select name="type" id="" value={type} className="form-control" onChange={handleChange}>
-                    {options}
+                    {types}
+                   </select>
+                </div>
+                <div className="form-group">
+                   <label htmlFor="capacity">guests</label>
+                   <select name="capacity" id="" value={capacity} className="form-control" onChange={handleChange}>
+                    {guests}
                    </select>
                 </div>
            </form> 
         </section>    
+
+        //GUEST FILTER
+
     )
 
 }
