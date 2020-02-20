@@ -57,7 +57,7 @@ class LoftProvider extends Component {
 
     handleChange = event => {
         const target = event.target
-        const value = event.type === 'checkbox' ? target.checked : target.value
+        const value = target.type === 'checkbox' ? target.checked : target.value
         const name = event.target.name
         this.setState({
             [name]: value
@@ -70,12 +70,23 @@ class LoftProvider extends Component {
             lofts, type, capacity, price, minSize, maxSize, breakfast, pets } = this.state
         //capacity from string to integer
         capacity = parseInt(capacity)
+        price = parseInt(price)
+        minSize = parseInt(minSize)
+        maxSize = parseInt(maxSize)
+        
         let tempLofts = [...lofts]
         tempLofts = type !== 'all' ? tempLofts.filter(loft => loft.type === type) : lofts
         //filter by capacity (again)
         tempLofts = capacity !== 1 ? tempLofts.filter(loft => loft.capacity >= capacity) : tempLofts
-        
-        
+        //filter by size
+        tempLofts = minSize != 0 || maxSize != 0 ? tempLofts.filter(loft => loft.size >= minSize && loft.size <= maxSize) : tempLofts
+        // filter by breakfast
+        tempLofts = breakfast ? tempLofts.filter(loft => loft.breakfast === true) : tempLofts
+        // filter by pets
+        tempLofts = pets ? tempLofts.filter(loft => loft.pets === true) : tempLofts
+        // //filter by price
+        tempLofts = tempLofts.filter(loft => loft.price < price)
+        console.log(price)
         this.setState({
             sortedLofts: tempLofts
         })
